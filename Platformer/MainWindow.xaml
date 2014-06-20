@@ -1,0 +1,9 @@
+﻿<Window x:Class="Platformer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="575" Width="742">
+    <Grid Name="mainGrid"/>
+
+    <!--<Canvas Background="LightSteelBlue" HorizontalAlignment="Left" Height="575" VerticalAlignment="Top" Width="742">
+    </Canvas>-->
+</Window>
