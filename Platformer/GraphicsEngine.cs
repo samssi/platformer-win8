@@ -59,7 +59,6 @@ namespace Platformer {
             }
 
             debugLabel.Content = debugPositionString("Hero: ", ourHero) + debugPositionString("Villan: ", enemy);
-            render2();
         }
 
         public void reset()
@@ -81,7 +80,7 @@ namespace Platformer {
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += update;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-            //dispatcherTimer.Start();
+            dispatcherTimer.Start();
         }
 
         private void update(object sender, EventArgs e)
@@ -89,23 +88,13 @@ namespace Platformer {
             render();
         }
 
-        private void render2()
+        private void render()
         {
-            canvas.Children.Clear();
             if (ourHero.collidesWith(enemy))
             {
                 heroAlive = false;
+                dispatcherTimer.Stop();
             }
-            if (heroAlive)
-            {
-                canvas.Children.Add(ourHero.draw(Brushes.Tomato));
-            }
-            canvas.Children.Add(enemy.draw(Brushes.Turquoise));
-
-        }
-
-        private void render()
-        {
             canvas.Children.Clear();
 
             String spritePositions = "";
@@ -113,18 +102,6 @@ namespace Platformer {
             int enemyNewPosition = enemy.getPosition().getX() - 1;
             enemy.getPosition().setX(enemyNewPosition);
 
-            int heroNewPosition = ourHero.getPosition().getX() + 1;
-            ourHero.getPosition().setX(heroNewPosition);
-
-            spritePositions += spritePositions += debugPositionString("Hero:", ourHero);
-            spritePositions += debugPositionString("Enemy:", enemy);
-
-            debugLabel.Content = spritePositions;
-
-            if (ourHero.collidesWith(enemy))
-            {
-                dispatcherTimer.Stop();
-            }
             if (heroAlive)
             {
                 canvas.Children.Add(ourHero.draw(Brushes.Tomato));
