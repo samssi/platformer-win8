@@ -54,7 +54,7 @@ namespace Platformer {
                 ourHero.getPosition().setX(newPos);
             }
 
-            debugLabel.Content = debugPositionString("Hero: ", ourHero);
+            debugLabel.Content = debugPositionString("Hero: ", ourHero) + debugPositionString("Villan: ", enemy);
             render2();
         }
 
@@ -82,6 +82,10 @@ namespace Platformer {
         private void render2()
         {
             canvas.Children.Clear();
+            if (ourHero.collidesWith(enemy))
+            {
+                heroAlive = false;
+            }
             if (heroAlive)
             {
                 canvas.Children.Add(ourHero.draw(Brushes.Tomato));
