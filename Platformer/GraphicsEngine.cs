@@ -65,6 +65,11 @@ namespace Platformer {
         {
             heroAlive = true;
             ourHero.getPosition().setX(50).setY(50);
+            enemy.getPosition().setX(120).setY(51);
+            if (!dispatcherTimer.IsEnabled)
+            {
+                dispatcherTimer.Start();
+            }
         }
 
         public void start()
