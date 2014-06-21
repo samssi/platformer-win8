@@ -138,7 +138,7 @@ namespace Platformer.sprite {
         {
             if (onTop(other))
                 return true;
-            if (doesEastPositionCollideWith(other))
+            if (doesSWCollideWith(other))
             {
                 return true;
             }
@@ -152,7 +152,13 @@ namespace Platformer.sprite {
 
         public Boolean doesEastPositionCollideWith(Sprite2D other)
         {
-            return this.getPositionCalculator().calculateEastPosition() == other.getPositionCalculator().calculateWestPosition();
+            return this.getPositionCalculator().calculateEastPosition() >= other.getPositionCalculator().calculateWestPosition();
+        }
+
+        public Boolean doesSWCollideWith(Sprite2D other)
+        {
+            return this.getPositionCalculator().calculateNorthPosition() >= other.getPositionCalculator().calculateNorthPosition()
+                && this.getPositionCalculator().calculateSouthPosition() <= other.getPositionCalculator().calculateNorthPosition();
         }
     }
 }

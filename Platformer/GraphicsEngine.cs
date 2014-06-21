@@ -43,7 +43,7 @@ namespace Platformer {
         }
 
         private void update(object sender, EventArgs e)
-        {    
+        {
             canvas.Children.Clear();
 
             String spritePositions = "";
@@ -51,13 +51,13 @@ namespace Platformer {
             int enemyNewPosition = enemy.getPosition().getX() - 1;
             enemy.getPosition().setX(enemyNewPosition);
 
-            spritePositions += "Enemy west: " + enemy.getPositionCalculator().calculateWestPosition();
-
             int heroNewPosition = ourHero.getPosition().getX() + 1;
             ourHero.getPosition().setX(heroNewPosition);
 
-            spritePositions += " Hero east: " + ourHero.getPositionCalculator().calculateEastPosition() + " alive: " + heroAlive;
-            debugLabel.Content = spritePositions; 
+            spritePositions += spritePositions += debugPositionString("Hero:", ourHero);
+            spritePositions += debugPositionString("Enemy:", enemy);
+
+            debugLabel.Content = spritePositions;
 
             if (ourHero.collidesWith(enemy))
             {
@@ -70,8 +70,16 @@ namespace Platformer {
             }
 
             canvas.Children.Add(enemy.draw(Brushes.Turquoise));
-            
+
         }
 
+        private String debugPositionString(String creatureLabel, Sprite2D sprite)
+        {
+            return creatureLabel
+                + " N: " + sprite.getPositionCalculator().calculateNorthPosition()
+                + " S: " + sprite.getPositionCalculator().calculateSouthPosition()
+                + " W: " + sprite.getPositionCalculator().calculateWestPosition()
+                + " E: " + sprite.getPositionCalculator().calculateEastPosition() + " ";
+        }
     }
 }
