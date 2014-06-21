@@ -17,7 +17,7 @@ namespace Platformer {
         private Grid mainGrid;
         private Canvas canvas = new Canvas();
         private Hero hero = new Hero(200,200);
-        private Enemy enemy = new Enemy(500, 400);
+        private Enemy enemy = new Enemy(500, 200);
         private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
 
@@ -42,8 +42,8 @@ namespace Platformer {
 
         public void reset()
         {
-            hero.sprite().getPosition().setX(200).setY(200);
-            enemy.sprite().getPosition().setX(500).setY(400);
+            hero = new Hero(200, 200);
+            enemy = new Enemy(500, 200);
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
@@ -62,7 +62,7 @@ namespace Platformer {
         {
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += update;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(10);
             dispatcherTimer.Start();
         }
 
