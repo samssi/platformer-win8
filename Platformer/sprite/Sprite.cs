@@ -140,6 +140,12 @@ namespace Platformer.sprite {
                 return true;
             if (doesSECollideWith(other))
                 return true;
+            if (doesNECollideWith(other))
+                return true;
+            if (doesNWCollideWith(other))
+                return true;
+            if (doesSWCollideWith(other))
+                return true;
             return false;
         }
 
@@ -148,22 +154,48 @@ namespace Platformer.sprite {
             return this.getPosition().postionEquals(other.getPosition());
         }
 
-        public Boolean doesEastCollideWith(Sprite2D other)
-        {
-            return between(this.getPositionCalculator().calculateEastPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
-        }
-
-        public Boolean doesSouthCollideWith(Sprite2D other)
-        {
-            return between(this.getPositionCalculator().calculateSouthPosition(), other.getPositionCalculator().calculateNorthPosition(), other.getPositionCalculator().calculateSouthPosition());
-        }
-
         public Boolean doesSECollideWith(Sprite2D other)
         {
             return doesSouthCollideWith(other) && doesEastCollideWith(other);
         }
-        public Boolean between(int position, int smallerThan, int higherThan) {
-            return position < higherThan && position > smallerThan;
+        public Boolean doesNECollideWith(Sprite2D other)
+        {
+            return doesNorthCollideWith(other) && doesEastCollideWith(other);
+        }
+
+        public Boolean doesNWCollideWith(Sprite2D other)
+        {
+            return doesNorthCollideWith(other) && doesWestCollideWith(other);
+        }
+
+        private bool doesSWCollideWith(Sprite2D other)
+        {
+            return doesSouthCollideWith(other) && doesWestCollideWith(other);
+        }
+
+        public Boolean betweenEqual(int position, int smallerEqualThan, int higherEqualThan)
+        {
+            return position <= higherEqualThan && position >= smallerEqualThan;
+        }
+
+        public Boolean doesEastCollideWith(Sprite2D other)
+        {
+            return betweenEqual(this.getPositionCalculator().calculateEastPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
+        }
+
+        public Boolean doesSouthCollideWith(Sprite2D other)
+        {
+            return betweenEqual(this.getPositionCalculator().calculateSouthPosition(), other.getPositionCalculator().calculateNorthPosition(), other.getPositionCalculator().calculateSouthPosition());
+        }
+
+        public Boolean doesNorthCollideWith(Sprite2D other)
+        {
+            return betweenEqual(this.getPositionCalculator().calculateNorthPosition(), other.getPositionCalculator().calculateNorthPosition(), other.getPositionCalculator().calculateSouthPosition());
+        }
+
+        public Boolean doesWestCollideWith(Sprite2D other)
+        {
+            return betweenEqual(this.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
         }
     }
 }
