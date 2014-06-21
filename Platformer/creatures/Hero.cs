@@ -20,28 +20,47 @@ namespace Platformer.creatures {
         {
             if (key == Key.Up)
             {
-                int currentPos = hero.getPosition().getY();
-                int newPos = currentPos - 1;
-                hero.getPosition().setY(newPos);
+                moveUp();
             }
             if (key == Key.Down)
             {
-                int currentPos = hero.getPosition().getY();
-                int newPos = currentPos + 1;
-                hero.getPosition().setY(newPos);
+                moveDown();
             }
             if (key == Key.Left)
             {
-                int currentPos = hero.getPosition().getX();
-                int newPos = currentPos - 1;
-                hero.getPosition().setX(newPos);
+                moveLeft();
             }
             if (key == Key.Right)
             {
-                int currentPos = hero.getPosition().getX();
-                int newPos = currentPos + 1;
-                hero.getPosition().setX(newPos);
+                moveRight();
             }
+        }
+        private void moveDown()
+        {
+            int currentPos = hero.getPosition().getY();
+            int newPos = currentPos + 1;
+            hero.getPosition().setY(newPos);
+        }
+
+        private void moveUp()
+        {
+            int currentPos = hero.getPosition().getY();
+            int newPos = currentPos - 1;
+            hero.getPosition().setY(newPos);
+        }
+
+        private void moveRight()
+        {
+            int currentPos = hero.getPosition().getX();
+            int newPos = currentPos + 1;
+            hero.getPosition().setX(newPos);
+        }
+
+        public void moveLeft()
+        {
+            int currentPos = hero.getPosition().getX();
+            int newPos = currentPos - 1;
+            hero.getPosition().setX(newPos);
         }
 
         public RectangleSprite sprite()
