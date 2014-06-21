@@ -8,8 +8,13 @@ using System.Windows.Input;
 
 namespace Platformer.creatures {
     public class Hero : Creature {
-        private RectangleSprite hero = new RectangleSprite(new Dimensions(50, 50), new Position(50, 50));
+        private RectangleSprite hero;
         private Boolean heroAlive = true;
+
+        public Hero(int x, int y)
+        {
+            hero = new RectangleSprite(new Dimensions(50, 50), new Position(x, y));
+        }
 
         public void control(Key key)
         {

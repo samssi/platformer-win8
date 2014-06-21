@@ -16,8 +16,8 @@ namespace Platformer {
     public class GraphicsEngine {
         private Grid mainGrid;
         private Canvas canvas = new Canvas();
-        private Hero hero = new Hero();
-        private Enemy enemy = new Enemy();
+        private Hero hero = new Hero(200,200);
+        private Enemy enemy = new Enemy(500, 400);
         private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
 
@@ -42,9 +42,8 @@ namespace Platformer {
 
         public void reset()
         {
-            hero.setHeroAlive(true);
-            hero.sprite().getPosition().setX(50).setY(50);
-            enemy.sprite().getPosition().setX(120).setY(51);
+            hero.sprite().getPosition().setX(200).setY(200);
+            enemy.sprite().getPosition().setX(500).setY(400);
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
