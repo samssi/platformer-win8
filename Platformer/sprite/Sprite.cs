@@ -98,12 +98,12 @@ namespace Platformer.sprite {
 
         public int calculateNorthPosition()
         {
-            return position.getY() + (dimensions.getLength() / 2);
+            return position.getY() - (dimensions.getLength() / 2);
         }
 
         public int calculateSouthPosition()
         {
-            return position.getY() - (dimensions.getLength() / 2);
+            return position.getY() + (dimensions.getLength() / 2);
         }
     }
 
@@ -152,7 +152,7 @@ namespace Platformer.sprite {
 
         public Boolean doesEastPositionCollideWith(Sprite2D other)
         {
-            return this.getPositionCalculator().calculateEastPosition() >= other.getPositionCalculator().calculateWestPosition();
+            return this.getPositionCalculator().calculateEastPosition() == other.getPositionCalculator().calculateWestPosition();
         }
 
         public Boolean doesSWCollideWith(Sprite2D other)

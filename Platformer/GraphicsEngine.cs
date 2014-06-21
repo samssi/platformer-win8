@@ -82,9 +82,11 @@ namespace Platformer {
         private void render2()
         {
             canvas.Children.Clear();
-
-            
-            canvas.Children.Add(ourHero.draw(Brushes.Tomato));
+            if (heroAlive)
+            {
+                canvas.Children.Add(ourHero.draw(Brushes.Tomato));
+            }
+            canvas.Children.Add(enemy.draw(Brushes.Turquoise));
 
         }
 
