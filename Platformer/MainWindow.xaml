@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="575" Width="742">
-    <Grid Name="mainGrid"/>
+    <Grid Name="mainGrid">
+        <Label Name ="debugLabel" Content="Debug: " HorizontalAlignment="Left" Margin="174,493,0,0" VerticalAlignment="Top" Width="550"/>
+    </Grid>
 
     <!--<Canvas Background="LightSteelBlue" HorizontalAlignment="Left" Height="575" VerticalAlignment="Top" Width="742">
     </Canvas>-->

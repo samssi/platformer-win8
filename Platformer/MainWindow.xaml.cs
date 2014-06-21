@@ -23,20 +23,7 @@ namespace Platformer {
             GraphicsEngine graphicsEngine = new GraphicsEngine(this);
             graphicsEngine.start();
 
-            /*DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += update;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-            dispatcherTimer.Start();*/
-
-            /*DispatcherTimer timer2 = new DispatcherTimer();
-            timer2.Interval = TimeSpan.FromSeconds(1);
-            timer2.Tick += timer_Tick;
-            timer2.Start();*/
-        }
-
-        void update(object sender, EventArgs e)
-        {
-            Debug.WriteLine("update 2");
+            
         }
 
     }

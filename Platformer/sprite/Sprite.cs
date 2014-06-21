@@ -93,7 +93,7 @@ namespace Platformer.sprite {
 
         public int calculateEastPosition()
         {
-            return position.getX() - (dimensions.getWidth() / 2);
+            return position.getX() + (dimensions.getWidth() / 2);
         }
 
         public int calculateNorthPosition()
@@ -136,36 +136,13 @@ namespace Platformer.sprite {
 
         public Boolean collidesWith(Sprite2D other)
         {
-            if (nwCollision(other))
-                return true;
-            if (swCollision(other))
-                return true;
-            if (neCollision(other))
-                return true;
-            if (seCollision(other))
-                return true;
             if (onTop(other))
                 return true;
+            if (doesEastPositionCollideWith(other))
+            {
+                return true;
+            }
             return false;
-        }
-
-        private Boolean nwCollision(Sprite2D other)
-        {
-            return doesNorthPositionCollideWith(other) && doesWestPositionCollideWith(other);
-        }
-        private Boolean swCollision(Sprite2D other)
-        {
-            return doesSouthPositionCollideWith(other) && doesWestPositionCollideWith(other);
-        }
-
-        private Boolean neCollision(Sprite2D other)
-        {
-            return doesNorthPositionCollideWith(other) && doesEastPositionCollideWith(other);
-        }
-
-        private Boolean seCollision(Sprite2D other)
-        {
-            return doesSouthPositionCollideWith(other) && doesEastPositionCollideWith(other);
         }
 
         private Boolean onTop(Sprite2D other)
@@ -173,24 +150,9 @@ namespace Platformer.sprite {
             return this.getPosition().postionEquals(other.getPosition());
         }
 
-        public Boolean doesSouthPositionCollideWith(Sprite2D other)
-        {
-            return this.getPositionCalculator().calculateSouthPosition() > other.getPositionCalculator().calculateSouthPosition() && this.getPositionCalculator().calculateSouthPosition() < this.getPositionCalculator().calculateNorthPosition();
-        }
-
-        public Boolean doesNorthPositionCollideWith(Sprite2D other)
-        {
-            return this.getPositionCalculator().calculateNorthPosition() > other.getPositionCalculator().calculateSouthPosition() && this.getPositionCalculator().calculateNorthPosition() < this.getPositionCalculator().calculateNorthPosition();
-        }
-
-        public Boolean doesWestPositionCollideWith(Sprite2D other)
-        {
-            return this.getPositionCalculator().calculateEastPosition() < other.getPositionCalculator().calculateEastPosition() && this.getPositionCalculator().calculateEastPosition() > other.getPositionCalculator().calculateWestPosition();
-        }
-
         public Boolean doesEastPositionCollideWith(Sprite2D other)
         {
-            return this.getPositionCalculator().calculateWestPosition() > other.getPositionCalculator().calculateEastPosition() && this.getPositionCalculator().calculateWestPosition() < other.getPositionCalculator().calculateEastPosition();
+            return this.getPositionCalculator().calculateEastPosition() == other.getPositionCalculator().calculateWestPosition();
         }
     }
 }

@@ -14,14 +14,16 @@ namespace Platformer {
     public class GraphicsEngine {
         private Grid mainGrid;
         private Canvas canvas = new Canvas();
+        private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
-        private RectangleSprite ourHero = new RectangleSprite(new Dimensions(50, 50), new Position(0, 0));
-        private RectangleSprite enemy = new RectangleSprite(new Dimensions(50, 50), new Position(60, 5));
+        private RectangleSprite ourHero = new RectangleSprite(new Dimensions(50, 50), new Position(50, 50));
+        private RectangleSprite enemy = new RectangleSprite(new Dimensions(50, 50), new Position(120, 51));
         private Boolean heroAlive = true;
 
         public GraphicsEngine(MainWindow window)
         {
             this.mainGrid = window.mainGrid;
+            this.debugLabel = window.debugLabel;
         }
 
         public void start()
@@ -36,7 +38,7 @@ namespace Platformer {
         {
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += update;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
             dispatcherTimer.Start();
         }
 
@@ -44,15 +46,23 @@ namespace Platformer {
         {    
             canvas.Children.Clear();
 
-            int heroNewPosition = ourHero.getPosition().getX() + 1;
-            ourHero.getPosition().setX(heroNewPosition);
+            String spritePositions = "";
 
             int enemyNewPosition = enemy.getPosition().getX() - 1;
             enemy.getPosition().setX(enemyNewPosition);
 
+            spritePositions += "Enemy west: " + enemy.getPositionCalculator().calculateWestPosition();
+
+            int heroNewPosition = ourHero.getPosition().getX() + 1;
+            ourHero.getPosition().setX(heroNewPosition);
+
+            spritePositions += " Hero east: " + ourHero.getPositionCalculator().calculateEastPosition() + " alive: " + heroAlive;
+            debugLabel.Content = spritePositions; 
+
             if (ourHero.collidesWith(enemy))
             {
-                heroAlive = false;
+                Debug.WriteLine("Dead");
+                dispatcherTimer.Stop();
             }
             if (heroAlive)
             {
@@ -60,6 +70,7 @@ namespace Platformer {
             }
 
             canvas.Children.Add(enemy.draw(Brushes.Turquoise));
+            
         }
 
     }
