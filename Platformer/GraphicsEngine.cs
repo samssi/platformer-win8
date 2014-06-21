@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using System.Diagnostics;
 using Platformer.sprite;
+using System.Windows.Input;
 
 namespace Platformer {
     public class GraphicsEngine {
@@ -26,6 +27,37 @@ namespace Platformer {
             this.debugLabel = window.debugLabel;
         }
 
+        public void keyboardEvent(Key key)
+        {
+            if (key == Key.Up)
+            {
+                int currentPos = ourHero.getPosition().getY();
+                int newPos = currentPos - 1;
+                ourHero.getPosition().setY(newPos);
+            }
+            if (key == Key.Down)
+            {
+                int currentPos = ourHero.getPosition().getY();
+                int newPos = currentPos + 1;
+                ourHero.getPosition().setY(newPos);
+            }
+            if (key == Key.Left)
+            {
+                int currentPos = ourHero.getPosition().getX();
+                int newPos = currentPos - 1;
+                ourHero.getPosition().setX(newPos);
+            }
+            if (key == Key.Right)
+            {
+                int currentPos = ourHero.getPosition().getX();
+                int newPos = currentPos + 1;
+                ourHero.getPosition().setX(newPos);
+            }
+
+            debugLabel.Content = debugPositionString("Hero: ", ourHero);
+            render2();
+        }
+
         public void start()
         {
             mainGrid.Children.Add(canvas);
@@ -39,10 +71,24 @@ namespace Platformer {
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += update;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-            dispatcherTimer.Start();
+            //dispatcherTimer.Start();
         }
 
         private void update(object sender, EventArgs e)
+        {
+            render();
+        }
+
+        private void render2()
+        {
+            canvas.Children.Clear();
+
+            
+            canvas.Children.Add(ourHero.draw(Brushes.Tomato));
+
+        }
+
+        private void render()
         {
             canvas.Children.Clear();
 
@@ -61,7 +107,6 @@ namespace Platformer {
 
             if (ourHero.collidesWith(enemy))
             {
-                Debug.WriteLine("Dead");
                 dispatcherTimer.Stop();
             }
             if (heroAlive)
@@ -70,7 +115,6 @@ namespace Platformer {
             }
 
             canvas.Children.Add(enemy.draw(Brushes.Turquoise));
-
         }
 
         private String debugPositionString(String creatureLabel, Sprite2D sprite)

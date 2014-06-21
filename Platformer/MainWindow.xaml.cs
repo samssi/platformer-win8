@@ -17,14 +17,20 @@ using System.Windows.Threading;
 
 namespace Platformer {
     public partial class MainWindow : Window {
+        private GraphicsEngine graphicsEngine;
+
         public MainWindow()
         {
             InitializeComponent();
-            GraphicsEngine graphicsEngine = new GraphicsEngine(this);
+            graphicsEngine = new GraphicsEngine(this);
             graphicsEngine.start();
 
-            
+            this.PreviewKeyDown += new KeyEventHandler(windowKeyEventHandler);
         }
 
+        private void windowKeyEventHandler(object sender, KeyEventArgs e)
+        {
+            graphicsEngine.keyboardEvent(e.Key);
+        }
     }
 }
