@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Platformer {
-    class RectangleSprite : Platformer.sprite.Sprite2D {
+    public class RectangleSprite : Platformer.sprite.Sprite2D {
         public RectangleSprite(Dimensions dimensions, Position position) : base(dimensions, position) { }
   
         public Rectangle draw(SolidColorBrush color)

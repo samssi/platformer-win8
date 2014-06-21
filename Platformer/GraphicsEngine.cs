@@ -10,16 +10,16 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using Platformer.sprite;
 using System.Windows.Input;
+using Platformer.creatures;
 
 namespace Platformer {
     public class GraphicsEngine {
         private Grid mainGrid;
         private Canvas canvas = new Canvas();
+        private Hero hero = new Hero();
+        private Enemy enemy = new Enemy();
         private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
-        private RectangleSprite ourHero = new RectangleSprite(new Dimensions(50, 50), new Position(50, 50));
-        private RectangleSprite enemy = new RectangleSprite(new Dimensions(50, 50), new Position(120, 51));
-        private Boolean heroAlive = true;
 
         public GraphicsEngine(MainWindow window)
         {
@@ -29,43 +29,22 @@ namespace Platformer {
 
         public void keyboardEvent(Key key)
         {
-            if (key == Key.Up)
-            {
-                int currentPos = ourHero.getPosition().getY();
-                int newPos = currentPos - 1;
-                ourHero.getPosition().setY(newPos);
-            }
-            if (key == Key.Down)
-            {
-                int currentPos = ourHero.getPosition().getY();
-                int newPos = currentPos + 1;
-                ourHero.getPosition().setY(newPos);
-            }
-            if (key == Key.Left)
-            {
-                int currentPos = ourHero.getPosition().getX();
-                int newPos = currentPos - 1;
-                ourHero.getPosition().setX(newPos);
-            }
-            if (key == Key.Right)
-            {
-                int currentPos = ourHero.getPosition().getX();
-                int newPos = currentPos + 1;
-                ourHero.getPosition().setX(newPos);
-            }
             if (key == Key.Space)
             {
                 reset();
             }
-
-            debugLabel.Content = debugPositionString("Hero: ", ourHero) + debugPositionString("Villan: ", enemy);
+            else
+            {
+                hero.control(key);
+            }
+            debugLabel.Content = debugPositionString("Hero: ", hero.sprite()) + debugPositionString("Villan: ", enemy.sprite());
         }
 
         public void reset()
         {
-            heroAlive = true;
-            ourHero.getPosition().setX(50).setY(50);
-            enemy.getPosition().setX(120).setY(51);
+            hero.setHeroAlive(true);
+            hero.sprite().getPosition().setX(50).setY(50);
+            enemy.sprite().getPosition().setX(120).setY(51);
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
@@ -75,8 +54,8 @@ namespace Platformer {
         public void start()
         {
             mainGrid.Children.Add(canvas);
-            canvas.Children.Add(ourHero.draw(Brushes.Tomato));
-            canvas.Children.Add(enemy.draw(Brushes.Turquoise));
+            canvas.Children.Add(hero.sprite().draw(Brushes.Tomato));
+            canvas.Children.Add(enemy.sprite().draw(Brushes.Turquoise));
             startTimer();
         }
 
@@ -90,29 +69,23 @@ namespace Platformer {
 
         private void update(object sender, EventArgs e)
         {
-            render();
+            if (hero.sprite().collidesWith(enemy.sprite()))
+            {
+                hero.setHeroAlive(false);
+                dispatcherTimer.Stop();
+            }
+            else
+            {
+                enemy.move();
+                render();
+            }
         }
 
         private void render()
         {
-            if (ourHero.collidesWith(enemy))
-            {
-                heroAlive = false;
-                dispatcherTimer.Stop();
-            }
             canvas.Children.Clear();
-
-            String spritePositions = "";
-
-            int enemyNewPosition = enemy.getPosition().getX() - 1;
-            enemy.getPosition().setX(enemyNewPosition);
-
-            if (heroAlive)
-            {
-                canvas.Children.Add(ourHero.draw(Brushes.Tomato));
-            }
-
-            canvas.Children.Add(enemy.draw(Brushes.Turquoise));
+            canvas.Children.Add(hero.sprite().draw(Brushes.Tomato));
+            canvas.Children.Add(enemy.sprite().draw(Brushes.Turquoise));
         }
 
         private String debugPositionString(String creatureLabel, Sprite2D sprite)

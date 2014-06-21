@@ -53,6 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="creatures\Creature.cs" />
+    <Compile Include="creatures\Enemy.cs" />
+    <Compile Include="creatures\Hero.cs" />
     <Compile Include="sprite\Sprite.cs" />
     <Compile Include="RectangleSprite.cs" />
     <Page Include="MainWindow.xaml">
