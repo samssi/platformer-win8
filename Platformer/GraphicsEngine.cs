@@ -53,9 +53,19 @@ namespace Platformer {
                 int newPos = currentPos + 1;
                 ourHero.getPosition().setX(newPos);
             }
+            if (key == Key.Space)
+            {
+                reset();
+            }
 
             debugLabel.Content = debugPositionString("Hero: ", ourHero) + debugPositionString("Villan: ", enemy);
             render2();
+        }
+
+        public void reset()
+        {
+            heroAlive = true;
+            ourHero.getPosition().setX(50).setY(50);
         }
 
         public void start()

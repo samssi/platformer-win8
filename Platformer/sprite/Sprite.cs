@@ -137,14 +137,9 @@ namespace Platformer.sprite {
         public Boolean collidesWith(Sprite2D other)
         {
             if (onTop(other))
-            {
                 return true;
-            }
-            Boolean seCollision = doesSECollideWith(other);
-            if (seCollision)
-            {
+            if (doesSECollideWith(other))
                 return true;
-            }
             return false;
         }
 
