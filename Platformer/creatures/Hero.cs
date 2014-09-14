@@ -10,11 +10,7 @@ using System.Windows.Threading;
 
 namespace Platformer.creatures {
     public class Hero : Creature {
-        public Hero(int x, int y, CreatureBehaviorRepository creatureBehaviors)
-            : base(x, y, creatureBehaviors)
-        { 
-            
-        }
+        public Hero(int x, int y, CreatureBehaviorRepository creatureBehaviors) : base(x, y, creatureBehaviors) { }
 
         public void control(Key key)
         {

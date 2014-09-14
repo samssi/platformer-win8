@@ -19,7 +19,7 @@ namespace Platformer.creatures {
             {
                 creatureBehaviors.AddRange(result);
             }
-            behaviors.Add(key, creatureBehaviors);
+            behaviors[key] = creatureBehaviors;
             return this;
         }
 
