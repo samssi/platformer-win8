@@ -18,18 +18,6 @@ namespace Platformer.creatures {
         public void control(Key key)
         {
             executeBehaviors(key);
-            if (key == Key.Right)
-            {
-                moveRight();
-            }
-        }
-
-
-        private void moveRight()
-        {
-            int currentPos = getPosition().getX();
-            int newPos = currentPos + 1;
-            getPosition().setX(newPos);
         }
     }
 }
