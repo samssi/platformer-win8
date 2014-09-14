@@ -7,22 +7,13 @@ using System.Threading.Tasks;
 
 namespace Platformer.creatures {
     public class Enemy : Creature {
-        private RectangleSprite enemy;
 
-        public Enemy(int x, int y)
-        {
-            enemy = new RectangleSprite(new Dimensions(50, 50), new Position(x, y));
-        }
+        public Enemy(int x, int y, List<CreatureBehavior> creatureBehaviors) : base(x, y, creatureBehaviors) { }
 
         public void move()
         {
-            int enemyNewPosition = enemy.getPosition().getX() - 1;
-            enemy.getPosition().setX(enemyNewPosition);
-        }
-
-        public RectangleSprite sprite()
-        {
-            return enemy;
+            int enemyNewPosition = sprite().getPosition().getX() - 1;
+            sprite().getPosition().setX(enemyNewPosition);
         }
     }
 }

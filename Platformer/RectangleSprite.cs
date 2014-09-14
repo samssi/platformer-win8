@@ -24,5 +24,10 @@ namespace Platformer {
             rectangle.Fill = color;
             return rectangle;
         }
+
+        public RectangleSprite sprite()
+        {
+            return this;
+        }
     }
 }

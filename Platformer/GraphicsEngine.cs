@@ -15,9 +15,9 @@ using Platformer.creatures;
 namespace Platformer {
     public class GraphicsEngine {
         private Grid mainGrid;
-        private Canvas canvas = new Canvas();
-        private Hero hero = new Hero(200,200);
-        private Enemy enemy = new Enemy(500, 200);
+        private Canvas canvas;
+        private Hero hero;
+        private Enemy enemy;
         private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
 
@@ -25,6 +25,20 @@ namespace Platformer {
         {
             this.mainGrid = window.mainGrid;
             this.debugLabel = window.debugLabel;
+            this.canvas = new Canvas();
+            this.hero = new Hero(200, 200, heroBehaviors());
+            this.enemy = new Enemy(500, 200, enemyBehaviors());
+        }
+
+        public List<CreatureBehavior> heroBehaviors() {
+            List<CreatureBehavior> heroBehaviors = new List<CreatureBehavior>();
+            heroBehaviors.Add(new JumpingBehavior());
+            return heroBehaviors;
+        }
+
+        public List<CreatureBehavior> enemyBehaviors() {
+            List<CreatureBehavior> heroBehaviors = new List<CreatureBehavior>();
+            return heroBehaviors;
         }
 
         public void keyboardEvent(Key key)
@@ -42,8 +56,8 @@ namespace Platformer {
 
         public void reset()
         {
-            hero = new Hero(200, 200);
-            enemy = new Enemy(500, 200);
+            hero = new Hero(200, 200, heroBehaviors());
+            enemy = new Enemy(500, 200, enemyBehaviors());
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
