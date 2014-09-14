@@ -9,7 +9,8 @@ using System.Windows.Threading;
 
 namespace Platformer.creatures {
     public class Hero : Creature {
-        public Hero(int x, int y, List<CreatureBehavior> creatureBehaviors) : base(x, y, creatureBehaviors)
+        public Hero(int x, int y, Dictionary<Key, List<CreatureBehavior>> creatureBehaviors)
+            : base(x, y, creatureBehaviors)
         { 
             
         }
@@ -18,7 +19,7 @@ namespace Platformer.creatures {
         {
             if (key == Key.Up)
             {
-                executeBehaviors();
+                executeBehaviors(key);
             }
             if (key == Key.Down)
             {

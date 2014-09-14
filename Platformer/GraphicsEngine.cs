@@ -30,15 +30,24 @@ namespace Platformer {
             this.enemy = new Enemy(500, 200, enemyBehaviors());
         }
 
-        public List<CreatureBehavior> heroBehaviors() {
-            List<CreatureBehavior> heroBehaviors = new List<CreatureBehavior>();
-            heroBehaviors.Add(new JumpingBehavior());
+        public Dictionary<Key, List<CreatureBehavior>> heroBehaviors()
+        {
+            Dictionary<Key, List<CreatureBehavior>> heroBehaviors = new Dictionary<Key, List<CreatureBehavior>>();
+            heroBehaviors[Key.Up] = heroKeyUpBehaviors();
             return heroBehaviors;
         }
 
-        public List<CreatureBehavior> enemyBehaviors() {
-            List<CreatureBehavior> heroBehaviors = new List<CreatureBehavior>();
-            return heroBehaviors;
+        public Dictionary<Key, List<CreatureBehavior>> enemyBehaviors()
+        {
+            Dictionary<Key, List<CreatureBehavior>> behaviors = new Dictionary<Key, List<CreatureBehavior>>();
+            return behaviors;
+        }
+
+        public List<CreatureBehavior> heroKeyUpBehaviors()
+        {
+            List <CreatureBehavior> behaviors = new List<CreatureBehavior>();
+            behaviors.Add(new JumpingBehavior());
+            return behaviors;
         }
 
         public void keyboardEvent(Key key)
