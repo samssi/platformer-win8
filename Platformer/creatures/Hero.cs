@@ -17,18 +17,7 @@ namespace Platformer.creatures {
 
         public void control(Key key)
         {
-            if (key == Key.Up)
-            {
-                executeBehaviors(key);
-            }
-            if (key == Key.Down)
-            {
-                
-            }
-            if (key == Key.Left)
-            {
-                moveLeft();
-            }
+            executeBehaviors(key);
             if (key == Key.Right)
             {
                 moveRight();
@@ -40,13 +29,6 @@ namespace Platformer.creatures {
         {
             int currentPos = getPosition().getX();
             int newPos = currentPos + 1;
-            getPosition().setX(newPos);
-        }
-
-        public void moveLeft()
-        {
-            int currentPos = getPosition().getX();
-            int newPos = currentPos - 1;
             getPosition().setX(newPos);
         }
     }

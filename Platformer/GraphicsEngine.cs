@@ -34,12 +34,20 @@ namespace Platformer {
         {
             Dictionary<Key, List<CreatureBehavior>> heroBehaviors = new Dictionary<Key, List<CreatureBehavior>>();
             heroBehaviors[Key.Up] = heroKeyUpBehaviors();
+            heroBehaviors[Key.Left] = heroKeyLeftBehaviors();
             return heroBehaviors;
         }
 
         public Dictionary<Key, List<CreatureBehavior>> enemyBehaviors()
         {
             Dictionary<Key, List<CreatureBehavior>> behaviors = new Dictionary<Key, List<CreatureBehavior>>();
+            return behaviors;
+        }
+
+        public List<CreatureBehavior> heroKeyLeftBehaviors()
+        {
+            List<CreatureBehavior> behaviors = new List<CreatureBehavior>();
+            behaviors.Add(new LeftMovingBehavior());
             return behaviors;
         }
 
