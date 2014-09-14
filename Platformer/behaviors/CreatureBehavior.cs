@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Platformer.creatures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Platformer.creatures {
+namespace Platformer.behaviors {
     abstract public class CreatureBehavior {
         abstract public void behave(Creature creature);
     }

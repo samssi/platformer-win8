@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Platformer.creatures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace Platformer.creatures {
+namespace Platformer.behaviors {
     class JumpingBehavior : CreatureBehavior {
         private DispatcherTimer jumpTimer;
         private Creature creature;

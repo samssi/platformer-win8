@@ -54,12 +54,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="creatures\Creature.cs" />
-    <Compile Include="creatures\CreatureBehavior.cs" />
+    <Compile Include="behaviors\CreatureBehavior.cs" />
     <Compile Include="creatures\Enemy.cs" />
     <Compile Include="creatures\Hero.cs" />
-    <Compile Include="creatures\JumpingBehavior.cs" />
-    <Compile Include="creatures\LeftMovingBehavior.cs" />
-    <Compile Include="creatures\RightMovingBehavior.cs" />
+    <Compile Include="behaviors\JumpingBehavior.cs" />
+    <Compile Include="behaviors\LeftMovingBehavior.cs" />
+    <Compile Include="behaviors\RightMovingBehavior.cs" />
     <Compile Include="sprite\Sprite.cs" />
     <Compile Include="RectangleSprite.cs" />
     <Page Include="MainWindow.xaml">

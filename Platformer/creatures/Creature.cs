@@ -1,4 +1,5 @@
-﻿using Platformer.sprite;
+﻿using Platformer.behaviors;
+using Platformer.sprite;
 using System;
 using System.Collections.Generic;
 using System.Linq;

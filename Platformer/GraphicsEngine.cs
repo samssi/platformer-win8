@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Platformer.sprite;
 using System.Windows.Input;
 using Platformer.creatures;
+using Platformer.behaviors;
 
 namespace Platformer {
     public class GraphicsEngine {
