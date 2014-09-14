@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace Platformer.creatures {
     public class Enemy : Creature {
 
-        public Enemy(int x, int y, Dictionary<Key, List<CreatureBehavior>> creatureBehaviors) : base(x, y, creatureBehaviors) { }
+        public Enemy(int x, int y, CreatureBehaviorRepository creatureBehaviors) : base(x, y, creatureBehaviors) { }
 
         public void move()
         {

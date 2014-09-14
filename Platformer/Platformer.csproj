@@ -55,6 +55,7 @@
     </ApplicationDefinition>
     <Compile Include="creatures\Creature.cs" />
     <Compile Include="behaviors\CreatureBehavior.cs" />
+    <Compile Include="creatures\CreatureBehaviorRepository.cs" />
     <Compile Include="creatures\Enemy.cs" />
     <Compile Include="creatures\Hero.cs" />
     <Compile Include="behaviors\JumpingBehavior.cs" />

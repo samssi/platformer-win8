@@ -31,40 +31,20 @@ namespace Platformer {
             this.enemy = new Enemy(500, 200, enemyBehaviors());
         }
 
-        public Dictionary<Key, List<CreatureBehavior>> heroBehaviors()
+        public CreatureBehaviorRepository heroBehaviors()
         {
-            Dictionary<Key, List<CreatureBehavior>> heroBehaviors = new Dictionary<Key, List<CreatureBehavior>>();
-            heroBehaviors[Key.Up] = heroKeyUpBehaviors();
-            heroBehaviors[Key.Left] = heroKeyLeftBehaviors();
-            heroBehaviors[Key.Right] = heroKeyRightBehaviors();
-            return heroBehaviors;
+            CreatureBehaviorRepository creatureBehaviorRepository = new CreatureBehaviorRepository();
+            creatureBehaviorRepository
+                .addTo(Key.Up, new JumpingBehavior())
+                .addTo(Key.Left, new LeftMovingBehavior())
+                .addTo(Key.Right, new RightMovingBehavior());
+            return creatureBehaviorRepository;
         }
 
-        public Dictionary<Key, List<CreatureBehavior>> enemyBehaviors()
+        public CreatureBehaviorRepository enemyBehaviors()
         {
-            Dictionary<Key, List<CreatureBehavior>> behaviors = new Dictionary<Key, List<CreatureBehavior>>();
-            return behaviors;
-        }
-
-        public List<CreatureBehavior> heroKeyRightBehaviors()
-        {
-            List<CreatureBehavior> behaviors = new List<CreatureBehavior>();
-            behaviors.Add(new RightMovingBehavior());
-            return behaviors;
-        }
-
-        public List<CreatureBehavior> heroKeyLeftBehaviors()
-        {
-            List<CreatureBehavior> behaviors = new List<CreatureBehavior>();
-            behaviors.Add(new LeftMovingBehavior());
-            return behaviors;
-        }
-
-        public List<CreatureBehavior> heroKeyUpBehaviors()
-        {
-            List <CreatureBehavior> behaviors = new List<CreatureBehavior>();
-            behaviors.Add(new JumpingBehavior());
-            return behaviors;
+            CreatureBehaviorRepository creatureBehaviorRepository = new CreatureBehaviorRepository();
+            return creatureBehaviorRepository;
         }
 
         public void keyboardEvent(Key key)
