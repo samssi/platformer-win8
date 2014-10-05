@@ -120,7 +120,7 @@ namespace Platformer.sprite {
         }
 
         public Boolean doesEastCollideBetweenWestEast(Sprite2D other) {
-            return betweenEqual(this.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
+            return betweenEqual(this.getPositionCalculator().calculateEastPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
         }
 
         public Boolean doesSouthCollideWith(Sprite2D other)
