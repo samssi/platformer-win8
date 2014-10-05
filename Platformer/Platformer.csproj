@@ -53,17 +53,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="behaviors\CreatureBehaviorRepository.cs" />
-    <Compile Include="behaviors\CreatureCollisionBehavior.cs" />
-    <Compile Include="behaviors\HeroGeneralCollisionBehavior.cs" />
+    <Compile Include="behaviors\repositories\CreatureBehaviorRepository.cs" />
+    <Compile Include="behaviors\interfaces\CreatureCollisionBehavior.cs" />
+    <Compile Include="behaviors\collision\HeroGeneralCollisionBehavior.cs" />
     <Compile Include="creatures\Creature.cs" />
-    <Compile Include="behaviors\CreatureBehavior.cs" />
-    <Compile Include="behaviors\KeyEventBehaviorRepository.cs" />
+    <Compile Include="behaviors\interfaces\CreatureBehavior.cs" />
+    <Compile Include="behaviors\repositories\KeyEventBehaviorRepository.cs" />
     <Compile Include="creatures\Enemy.cs" />
     <Compile Include="creatures\Hero.cs" />
-    <Compile Include="behaviors\JumpingBehavior.cs" />
-    <Compile Include="behaviors\LeftMovingBehavior.cs" />
-    <Compile Include="behaviors\RightMovingBehavior.cs" />
+    <Compile Include="behaviors\keyevent\JumpingBehavior.cs" />
+    <Compile Include="behaviors\keyevent\LeftMovingBehavior.cs" />
+    <Compile Include="behaviors\keyevent\RightMovingBehavior.cs" />
     <Compile Include="sprite\CollisionType.cs" />
     <Compile Include="sprite\Sprite.cs" />
     <Compile Include="RectangleSprite.cs" />
@@ -108,6 +108,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
