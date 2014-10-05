@@ -197,7 +197,7 @@ namespace Platformer.sprite {
 
         public Boolean betweenEqual(int position, int leftEqualThan, int rightEqualThan)
         {
-            return position <= rightEqualThan && position >= leftEqualThan;
+            return position >= leftEqualThan && position <= rightEqualThan;
         }
 
         public Boolean doesEastCollideWith(Sprite2D other)
