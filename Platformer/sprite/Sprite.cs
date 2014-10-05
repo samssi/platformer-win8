@@ -9,12 +9,23 @@ namespace Platformer.sprite {
         private readonly Dimensions dimensions;
         private readonly Position position;
         private readonly PositionCalculator positionCalculator;
+        private Boolean alive = true;
 
         public Sprite2D(Dimensions dimensions, Position position)
         {
             this.dimensions = dimensions;
             this.position = position;
             this.positionCalculator = new PositionCalculator(position, dimensions);
+        }
+
+        public void setAlive(Boolean alive)
+        {
+            this.alive = alive;
+        }
+
+        public Boolean isAlive()
+        {
+            return alive;
         }
 
         public PositionCalculator getPositionCalculator()
@@ -34,12 +45,15 @@ namespace Platformer.sprite {
 
         public CollisionType collidesWith(Sprite2D other)
         {
-            /*
-              if(isDead())
-                 return CollisionType.DEAD;
-             */
+
+            if (!other.isAlive())
+                return CollisionType.DEAD;
             if (onTop(other))
                 return CollisionType.ON_TOP;
+            if (doesSouthCollideWithBetweenWestEast(other))
+                return CollisionType.S;
+            if (doesNorthCollideWithBetweenWestEast(other))
+                return CollisionType.N;
             if (doesSECollideWith(other))
                 return CollisionType.SE;
             if (doesNECollideWith(other))
@@ -48,17 +62,9 @@ namespace Platformer.sprite {
                 return CollisionType.NW;
             if (doesSWCollideWith(other))
                 return CollisionType.SW;
-            if (doesSouthCollideWithBetweenLeftRight(other))
-                return CollisionType.S;
             
             return CollisionType.NONE;
         }
-
-        
-        /* private Boolean isDead(Sprite2D other)
-        {
-            return !other.isAlive();
-        }*/
 
         private Boolean onTop(Sprite2D other)
         {
@@ -94,22 +100,27 @@ namespace Platformer.sprite {
             return betweenEqual(this.getPositionCalculator().calculateEastPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
         }
 
-        public Boolean doesSouthCollideWithBetweenLeftRight(Sprite2D other)
+        public Boolean doesNorthCollideWithBetweenWestEast(Sprite2D other)
         {
-            return doesSouthCollideWith(other) && doesLeftRightCollideBetweenLeftRight(other);
+            return doesNorthCollideWith(other) && doesWestEastCollideBetweenWestEast(other);
         }
 
-        public Boolean doesLeftRightCollideBetweenLeftRight(Sprite2D other)
+        public Boolean doesSouthCollideWithBetweenWestEast(Sprite2D other)
         {
-            return doesLeftCollideBetweenLeftRight(other) && doesRightCollideBetweenLeftRight(other);
+            return doesSouthCollideWith(other) && doesWestEastCollideBetweenWestEast(other);
         }
 
-        public Boolean doesLeftCollideBetweenLeftRight(Sprite2D other) {
-            return betweenEqual(this.getPositionCalculator().calculateLeft(), other.getPositionCalculator().calculateLeft(), other.getPositionCalculator().calculateRight());
+        public Boolean doesWestEastCollideBetweenWestEast(Sprite2D other)
+        {
+            return doesWestCollideBetweenWestEast(other) || doesEastCollideBetweenWestEast(other);
         }
 
-        public Boolean doesRightCollideBetweenLeftRight(Sprite2D other) {
-            return betweenEqual(this.getPositionCalculator().calculateRight(), other.getPositionCalculator().calculateLeft(), other.getPositionCalculator().calculateRight());
+        public Boolean doesWestCollideBetweenWestEast(Sprite2D other) {
+            return betweenEqual(this.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
+        }
+
+        public Boolean doesEastCollideBetweenWestEast(Sprite2D other) {
+            return betweenEqual(this.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateWestPosition(), other.getPositionCalculator().calculateEastPosition());
         }
 
         public Boolean doesSouthCollideWith(Sprite2D other)

@@ -11,7 +11,6 @@ namespace Platformer.behaviors {
     public class Creature : RectangleSprite {
         private KeyEventBehaviorRepository creatureKeyEventBehaviors;
         private CreatureBehaviorRepository creatureCollisionBehaviors;
-        private Boolean alive = true;
 
         public Creature(int x, int y, KeyEventBehaviorRepository creatureKeyEventBehaviors, CreatureBehaviorRepository creatureCollisionBehaviors)
             : base(new Dimensions(50, 50), new Position(x, y))
@@ -30,16 +29,6 @@ namespace Platformer.behaviors {
         {
             foreach (var behavior in creatureCollisionBehaviors.getCreatureCollisionBehaviors())
                 behavior.behave(this, collisionType);
-        }
-
-        public void setAlive(Boolean alive)
-        {
-            this.alive = alive;
-        }
-
-        public Boolean isAlive()
-        {
-            return alive;
         }
     }
 }

@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Platformer.sprite {
     public enum CollisionType {
-        NONE, ON_TOP, N, NE, E, SE, S, SW, W, NW, DEAD
+        NONE, ON_TOP, N, NE, SE, S, SW, NW, DEAD
     }
 }

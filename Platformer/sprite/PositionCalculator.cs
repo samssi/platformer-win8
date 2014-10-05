@@ -34,14 +34,5 @@ namespace Platformer.sprite {
         {
             return position.getY() + (dimensions.getLength() / 2);
         }
-
-        public int calculateLeft()
-        {
-            return position.getX() / 2;
-        }
-        public int calculateRight()
-        {
-            return position.getX() * 2;
-        }
     }
 }

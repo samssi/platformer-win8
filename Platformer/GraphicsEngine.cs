@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Platformer.sprite;
 using System.Windows.Input;
 using Platformer.behaviors;
+using Platformer.behaviors.collision;
 
 namespace Platformer {
     public class GraphicsEngine {
@@ -31,7 +32,9 @@ namespace Platformer {
         }
 
         public CreatureBehaviorRepository enemyCollisionBehaviors() {
-             return new CreatureBehaviorRepository(new List<CreatureCollisionBehavior>());
+            List<CreatureCollisionBehavior> creatureCollisionBehaviors = new List<CreatureCollisionBehavior>();
+            creatureCollisionBehaviors.Add(new EnemyCollisionBehavior());
+            return new CreatureBehaviorRepository(creatureCollisionBehaviors);
         }
 
         public KeyEventBehaviorRepository heroKeyEventBehaviors()
@@ -109,18 +112,6 @@ namespace Platformer {
                 enemy.move();
                 render();
             }
-            
-            /*if (hero.sprite().collidesWith(enemy.sprite()))
-            {
-                //hero.setHeroAlive(false);
-                //dispatcherTimer.Stop();
-            }
-            else
-            {
-                enemy.move();
-                render();
-            }*/
-            //render();
         }
 
         private void render()
@@ -142,6 +133,7 @@ namespace Platformer {
         public void creatureEvent()
         {
             // Enemies should come as collection
+            enemy.executeCollisionBehaviors(enemy.collidesWith(hero));
             hero.executeCollisionBehaviors(hero.collidesWith(enemy));
         }
     }
