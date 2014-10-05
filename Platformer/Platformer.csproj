@@ -65,6 +65,9 @@
     <Compile Include="behaviors\keyevent\LeftMovingBehavior.cs" />
     <Compile Include="behaviors\keyevent\RightMovingBehavior.cs" />
     <Compile Include="sprite\CollisionType.cs" />
+    <Compile Include="sprite\Dimensions.cs" />
+    <Compile Include="sprite\Position.cs" />
+    <Compile Include="sprite\PositionCalculator.cs" />
     <Compile Include="sprite\Sprite.cs" />
     <Compile Include="RectangleSprite.cs" />
     <Page Include="MainWindow.xaml">
