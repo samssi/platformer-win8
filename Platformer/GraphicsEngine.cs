@@ -12,6 +12,7 @@ using Platformer.sprite;
 using System.Windows.Input;
 using Platformer.behaviors;
 using Platformer.behaviors.collision;
+using Platformer.behaviors.moving;
 
 namespace Platformer {
     public class GraphicsEngine {
@@ -34,6 +35,7 @@ namespace Platformer {
         public CreatureBehaviorRepository enemyCollisionBehaviors() {
             List<CreatureCollisionBehavior> creatureCollisionBehaviors = new List<CreatureCollisionBehavior>();
             creatureCollisionBehaviors.Add(new EnemyCollisionBehavior());
+            creatureCollisionBehaviors.Add(new EnemyMovingBehavior());
             return new CreatureBehaviorRepository(creatureCollisionBehaviors);
         }
 
@@ -109,7 +111,6 @@ namespace Platformer {
             }
             else
             {
-                enemy.move();
                 render();
             }
         }
@@ -132,9 +133,14 @@ namespace Platformer {
 
         public void creatureEvent()
         {
+            enemyEvent();
             // Enemies should come as collection
-            enemy.executeCollisionBehaviors(enemy.collidesWith(hero));
             hero.executeCollisionBehaviors(hero.collidesWith(enemy));
+        }
+
+        private void enemyEvent()
+        {
+            enemy.executeCollisionBehaviors(enemy.collidesWith(hero));    
         }
     }
 }

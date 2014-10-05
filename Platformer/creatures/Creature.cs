@@ -30,5 +30,10 @@ namespace Platformer.behaviors {
             foreach (var behavior in creatureCollisionBehaviors.getCreatureCollisionBehaviors())
                 behavior.behave(this, collisionType);
         }
+
+        public CreatureBehaviorRepository getCreatureBehaviorRepository()
+        {
+            return creatureCollisionBehaviors;
+        }
     }
 }

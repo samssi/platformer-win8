@@ -12,10 +12,5 @@ namespace Platformer.behaviors {
 
         public Enemy(int x, int y, KeyEventBehaviorRepository creatureBehaviors, CreatureBehaviorRepository creatureCollisionBehaviors) : base(x, y, creatureBehaviors, creatureCollisionBehaviors) { }
 
-        public void move()
-        {
-            int enemyNewPosition = sprite().getPosition().getX() - 1;
-            sprite().getPosition().setX(enemyNewPosition);
-        }
     }
 }

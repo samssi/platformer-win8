@@ -54,6 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="behaviors\collision\EnemyCollisionBehavior.cs" />
+    <Compile Include="behaviors\moving\EnemyMovingBehavior.cs" />
     <Compile Include="behaviors\repositories\CreatureBehaviorRepository.cs" />
     <Compile Include="behaviors\interfaces\CreatureCollisionBehavior.cs" />
     <Compile Include="behaviors\collision\HeroGeneralCollisionBehavior.cs" />

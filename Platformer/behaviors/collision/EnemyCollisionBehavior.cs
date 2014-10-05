@@ -13,6 +13,8 @@ namespace Platformer.behaviors.collision {
             if (collisionType.Equals(CollisionType.N))
             {
                 me.setAlive(false);
+                me.getDimensions().setLength(1);
+                me.getCreatureBehaviorRepository().switchHeroCollisionBehaviors(new List<CreatureCollisionBehavior>());
             }
         }
     }
