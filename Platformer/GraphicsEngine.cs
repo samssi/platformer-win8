@@ -10,7 +10,6 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using Platformer.sprite;
 using System.Windows.Input;
-using Platformer.creatures;
 using Platformer.behaviors;
 
 namespace Platformer {
@@ -27,13 +26,17 @@ namespace Platformer {
             this.mainGrid = window.mainGrid;
             this.debugLabel = window.debugLabel;
             this.canvas = new Canvas();
-            this.hero = new Hero(200, 200, heroBehaviors());
-            this.enemy = new Enemy(500, 200, enemyBehaviors());
+            this.hero = new Hero(200, 200, heroKeyEventBehaviors(), heroGeneralCollisionBehaviors());
+            this.enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors());
         }
 
-        public CreatureBehaviorRepository heroBehaviors()
+        public CreatureBehaviorRepository enemyCollisionBehaviors() {
+             return new CreatureBehaviorRepository(new List<CreatureCollisionBehavior>());
+        }
+
+        public KeyEventBehaviorRepository heroKeyEventBehaviors()
         {
-            CreatureBehaviorRepository creatureBehaviorRepository = new CreatureBehaviorRepository();
+            KeyEventBehaviorRepository creatureBehaviorRepository = new KeyEventBehaviorRepository();
             creatureBehaviorRepository
                 .addTo(Key.Up, new JumpingBehavior())
                 .addTo(Key.Left, new LeftMovingBehavior())
@@ -41,9 +44,17 @@ namespace Platformer {
             return creatureBehaviorRepository;
         }
 
-        public CreatureBehaviorRepository enemyBehaviors()
+        public CreatureBehaviorRepository heroGeneralCollisionBehaviors()
         {
-            CreatureBehaviorRepository creatureBehaviorRepository = new CreatureBehaviorRepository();
+            List<CreatureCollisionBehavior> creatureCollisionBehaviors = new List<CreatureCollisionBehavior>();
+            creatureCollisionBehaviors.Add(new NormalHeroCollisionBehavior());
+            CreatureBehaviorRepository creatureBehaviorRepository = new CreatureBehaviorRepository(creatureCollisionBehaviors);
+            return creatureBehaviorRepository;
+        }
+
+        public KeyEventBehaviorRepository enemyBehaviors()
+        {
+            KeyEventBehaviorRepository creatureBehaviorRepository = new KeyEventBehaviorRepository();
             return creatureBehaviorRepository;
         }
 
@@ -62,8 +73,8 @@ namespace Platformer {
 
         public void reset()
         {
-            hero = new Hero(200, 200, heroBehaviors());
-            enemy = new Enemy(500, 200, enemyBehaviors());
+            hero = new Hero(200, 200, heroKeyEventBehaviors(), heroGeneralCollisionBehaviors());
+            enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors());
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
@@ -88,9 +99,9 @@ namespace Platformer {
 
         private void update(object sender, EventArgs e)
         {
-            if (hero.sprite().collidesWith(enemy.sprite()))
+            creatureEvent();
+            if (!hero.isAlive())
             {
-                hero.setHeroAlive(false);
                 dispatcherTimer.Stop();
             }
             else
@@ -98,6 +109,18 @@ namespace Platformer {
                 enemy.move();
                 render();
             }
+            
+            /*if (hero.sprite().collidesWith(enemy.sprite()))
+            {
+                //hero.setHeroAlive(false);
+                //dispatcherTimer.Stop();
+            }
+            else
+            {
+                enemy.move();
+                render();
+            }*/
+            //render();
         }
 
         private void render()
@@ -114,6 +137,12 @@ namespace Platformer {
                 + " S: " + sprite.getPositionCalculator().calculateSouthPosition()
                 + " W: " + sprite.getPositionCalculator().calculateWestPosition()
                 + " E: " + sprite.getPositionCalculator().calculateEastPosition() + " ";
+        }
+
+        public void creatureEvent()
+        {
+            // Enemies should come as collection
+            hero.executeCollisionBehaviors(hero.collidesWith(enemy));
         }
     }
 }

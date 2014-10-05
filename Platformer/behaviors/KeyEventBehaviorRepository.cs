@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Platformer.creatures {
-    public class CreatureBehaviorRepository {
+namespace Platformer.behaviors {
+    public class KeyEventBehaviorRepository {
         private Dictionary<Key, List<CreatureBehavior>> behaviors = new Dictionary<Key, List<CreatureBehavior>>();
 
-        public CreatureBehaviorRepository addTo(Key key, CreatureBehavior creatureBehavior) {
+        public KeyEventBehaviorRepository addTo(Key key, CreatureBehavior creatureBehavior) {
             List<CreatureBehavior> creatureBehaviors = new List<CreatureBehavior>();
             creatureBehaviors.Add(creatureBehavior);
 
@@ -31,6 +31,20 @@ namespace Platformer.creatures {
             {
                 creatureBehaviors.AddRange(result);
             }
+            return creatureBehaviors;
+        }
+    }
+
+    public class WorldEventBehaviorRepository {
+        private List<CreatureBehavior> creatureBehaviors = new List<CreatureBehavior>();
+
+        public WorldEventBehaviorRepository add(CreatureBehavior creatureBehavior)
+        {
+            creatureBehaviors.Add(creatureBehavior);
+            return this;
+        }
+        public List<CreatureBehavior> getWorldEventBehaviors()
+        {
             return creatureBehaviors;
         }
     }

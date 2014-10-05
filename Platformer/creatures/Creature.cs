@@ -7,33 +7,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Platformer.creatures {
-    // TODO: Rethink Creature and it's inheritance
+namespace Platformer.behaviors {
     public class Creature : RectangleSprite {
-        private CreatureBehaviorRepository behaviors;
-        private Boolean heroAlive = true;
+        private KeyEventBehaviorRepository creatureKeyEventBehaviors;
+        private CreatureBehaviorRepository creatureCollisionBehaviors;
+        private Boolean alive = true;
 
-        public Creature(int x, int y, CreatureBehaviorRepository creatureBehaviors)
+        public Creature(int x, int y, KeyEventBehaviorRepository creatureKeyEventBehaviors, CreatureBehaviorRepository creatureCollisionBehaviors)
             : base(new Dimensions(50, 50), new Position(x, y))
         {
-                behaviors = creatureBehaviors;
+                this.creatureKeyEventBehaviors = creatureKeyEventBehaviors;
+                this.creatureCollisionBehaviors = creatureCollisionBehaviors;
         }
         
-
-        public void executeBehaviors(Key key)
+        public void executeKeyEventBehaviors(Key key)
         {
-            foreach (var behavior in behaviors.getCreatureKeyBehaviors(key))
+            foreach (var behavior in creatureKeyEventBehaviors.getCreatureKeyBehaviors(key))
                 behavior.behave(this);
         }
 
-        public void setHeroAlive(Boolean heroAlive)
+        public void executeCollisionBehaviors(CollisionType collisionType)
         {
-            this.heroAlive = heroAlive;
+            foreach (var behavior in creatureCollisionBehaviors.getCreatureCollisionBehaviors())
+                behavior.behave(this, collisionType);
         }
 
-        public Boolean isHeroAlive()
+        public void setAlive(Boolean alive)
         {
-            return heroAlive;
+            this.alive = alive;
+        }
+
+        public Boolean isAlive()
+        {
+            return alive;
         }
     }
 }

@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Platformer.creatures {
+namespace Platformer.behaviors {
     public class Enemy : Creature {
 
-        public Enemy(int x, int y, CreatureBehaviorRepository creatureBehaviors) : base(x, y, creatureBehaviors) { }
+        public Enemy(int x, int y, KeyEventBehaviorRepository creatureBehaviors, CreatureBehaviorRepository creatureCollisionBehaviors) : base(x, y, creatureBehaviors, creatureCollisionBehaviors) { }
 
         public void move()
         {

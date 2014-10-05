@@ -53,14 +53,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="behaviors\CreatureBehaviorRepository.cs" />
+    <Compile Include="behaviors\CreatureCollisionBehavior.cs" />
+    <Compile Include="behaviors\HeroGeneralCollisionBehavior.cs" />
     <Compile Include="creatures\Creature.cs" />
     <Compile Include="behaviors\CreatureBehavior.cs" />
-    <Compile Include="creatures\CreatureBehaviorRepository.cs" />
+    <Compile Include="behaviors\KeyEventBehaviorRepository.cs" />
     <Compile Include="creatures\Enemy.cs" />
     <Compile Include="creatures\Hero.cs" />
     <Compile Include="behaviors\JumpingBehavior.cs" />
     <Compile Include="behaviors\LeftMovingBehavior.cs" />
     <Compile Include="behaviors\RightMovingBehavior.cs" />
+    <Compile Include="sprite\CollisionType.cs" />
     <Compile Include="sprite\Sprite.cs" />
     <Compile Include="RectangleSprite.cs" />
     <Page Include="MainWindow.xaml">

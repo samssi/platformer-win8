@@ -1,4 +1,4 @@
-﻿using Platformer.creatures;
+﻿using Platformer.behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +47,7 @@ namespace Platformer.behaviors {
             {
                 jumpingUp = false;
             }
-            if (creature.isHeroAlive() && jumpCycle <= jumpHeight)
+            if (creature.isAlive() && jumpCycle <= jumpHeight)
             {
                 jumpSequence();
             }

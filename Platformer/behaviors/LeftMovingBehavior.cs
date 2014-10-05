@@ -1,4 +1,4 @@
-﻿using Platformer.creatures;
+﻿using Platformer.behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
