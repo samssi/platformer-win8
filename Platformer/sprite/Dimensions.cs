@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Platformer.sprite {
     public class Dimensions {
         private int width;
-        private int length;
+        private int height;
 
-        public Dimensions(int width, int length)
+        public Dimensions(int width, int height)
         {
             this.width = width;
-            this.length = length;
+            this.height = height;
         }
 
         public int getWidth()
@@ -26,14 +26,14 @@ namespace Platformer.sprite {
             return this;
         }
 
-        public int getLength()
+        public int getHeight()
         {
-            return length;
+            return height;
         }
 
-        public Dimensions setLength(int length)
+        public Dimensions setHeight(int height)
         {
-            this.length = length;
+            this.height = height;
             return this;
         }
     }

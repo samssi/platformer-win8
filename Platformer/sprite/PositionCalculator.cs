@@ -27,12 +27,12 @@ namespace Platformer.sprite {
 
         public int calculateNorthPosition()
         {
-            return position.getY() - (dimensions.getLength() / 2);
+            return position.getY() - (dimensions.getHeight() / 2);
         }
 
         public int calculateSouthPosition()
         {
-            return position.getY() + (dimensions.getLength() / 2);
+            return position.getY() + (dimensions.getHeight() / 2);
         }
     }
 }

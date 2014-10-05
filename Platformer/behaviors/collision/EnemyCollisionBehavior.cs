@@ -13,7 +13,9 @@ namespace Platformer.behaviors.collision {
             if (collisionType.Equals(CollisionType.N))
             {
                 me.setAlive(false);
-                me.getDimensions().setLength(1);
+                int newY = me.getPositionCalculator().calculateSouthPosition();
+                me.getDimensions().setHeight(1);
+                me.getPosition().setY(newY);
                 me.getCreatureBehaviorRepository().switchHeroCollisionBehaviors(new List<CreatureCollisionBehavior>());
             }
         }

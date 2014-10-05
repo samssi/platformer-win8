@@ -16,9 +16,9 @@ namespace Platformer {
         {
             Rectangle rectangle = new Rectangle();
             rectangle.Width = base.getDimensions().getWidth();
-            rectangle.Height = base.getDimensions().getLength();
+            rectangle.Height = base.getDimensions().getHeight();
             int left = base.getPosition().getX() - (base.getDimensions().getWidth() / 2);
-            int top = base.getPosition().getY() - (base.getDimensions().getLength() / 2);
+            int top = base.getPosition().getY() - (base.getDimensions().getHeight() / 2);
             Canvas.SetLeft(rectangle, left);
             Canvas.SetTop(rectangle, top);
             rectangle.Fill = color;
