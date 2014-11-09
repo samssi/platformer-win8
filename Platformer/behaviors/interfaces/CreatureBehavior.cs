@@ -1,4 +1,5 @@
-﻿using Platformer.behaviors;
+﻿using Platformer.animation.frame;
+using Platformer.behaviors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
