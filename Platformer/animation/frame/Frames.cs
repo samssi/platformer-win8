@@ -11,14 +11,39 @@ namespace Platformer.animation.frame {
         private int frameDelayInMilliSeconds;
         private Boolean timerRunning;
         private int frame;
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private GraphicsEngine graphicsEngine;
 
-        public Frames(List<Frame> frames, int frameDelayInMilliSeconds)
+
+        public Frames(List<Frame> frames, int frameDelayInMilliSeconds, GraphicsEngine graphicsEngine)
         {
             this.frames = frames;
             this.frameDelayInMilliSeconds = frameDelayInMilliSeconds;
             this.timerRunning = false;
-            this.frame = -1;
+            this.frame = 0;
+            this.graphicsEngine = graphicsEngine;
+        }
+
+        public void stopFrames()
+        {
+            dispatcherTimer.Stop();
+            dispatcherTimer = new DispatcherTimer();
+            timerRunning = false;
+            frame = 0;
+        }
+
+        private void update(object sender, EventArgs e)
+        {
+            if (frame < frames.Count)
+            {
+                frames[frame].runFrame(graphicsEngine);
+                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(frameDelayInMilliSeconds);
+                frame++;
+            }
+            else
+            {
+                stopFrames();
+            }
         }
 
         public void runFrames()
@@ -29,27 +54,6 @@ namespace Platformer.animation.frame {
                 dispatcherTimer.Tick += update;
                 dispatcherTimer.Interval = TimeSpan.FromMilliseconds(0);
                 dispatcherTimer.Start();
-            }
-        }
-
-        public void stopFrames()
-        {
-            dispatcherTimer.Stop();
-            timerRunning = false;
-            frame = -1;
-        }
-
-        private void update(object sender, EventArgs e)
-        {
-            frame++;
-            if (frame < frames.Count)
-            {
-                frames[frame].runFrame();
-                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(frameDelayInMilliSeconds);
-            }
-            else
-            {
-                stopFrames();
             }
         }
     }

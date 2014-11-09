@@ -16,6 +16,12 @@ namespace Platformer.behaviors {
         private Boolean jumpingUp = false;
         private int jumpHeight = 120;
 
+        public JumpingBehavior(GraphicsEngine graphicsEngine)
+            : base(graphicsEngine)
+        {
+
+        }
+
         override public void behave(Creature creature)
         {
             this.creature = creature;

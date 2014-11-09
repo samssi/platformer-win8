@@ -6,18 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Platformer.behaviors {
     class RightMovingBehavior : CreatureBehavior {
         private Frames heroRightMovingFrames;
 
-        public RightMovingBehavior()
+        public RightMovingBehavior(GraphicsEngine graphicsEngine) : base (graphicsEngine)
         {
             List<Frame> heroFrames = new List<Frame>();
-            heroFrames.Add(new HeroFrame("Frame 1"));
-            heroFrames.Add(new HeroFrame("Frame 2"));
-            heroFrames.Add(new HeroFrame("Frame 3"));
-            this.heroRightMovingFrames = new Frames(heroFrames, 1000);
+            heroFrames.Add(new HeroFrame(Brushes.SteelBlue));
+            heroFrames.Add(new HeroFrame(Brushes.SpringGreen));
+            heroFrames.Add(new HeroFrame(Brushes.Tomato));
+            this.heroRightMovingFrames = new Frames(heroFrames, 1000, graphicsEngine);
         }
 
         public override void behave(Creature creature)

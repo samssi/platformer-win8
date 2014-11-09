@@ -22,34 +22,51 @@ namespace Platformer {
         private Enemy enemy;
         private Label debugLabel;
         private DispatcherTimer dispatcherTimer;
+        private KeyEventBehaviorRepository heroKeyEventBehaviors;
+        private CreatureBehaviorRepository enemyCollisionBehaviors;
+        private CreatureBehaviorRepository heroGeneralCollisionBehaviors;
+        private SolidColorBrush heroColor;
 
         public GraphicsEngine(MainWindow window)
         {
             this.mainGrid = window.mainGrid;
             this.debugLabel = window.debugLabel;
             this.canvas = new Canvas();
-            this.hero = new Hero(200, 200, heroKeyEventBehaviors(), heroGeneralCollisionBehaviors());
-            this.enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors());
+            this.heroColor = Brushes.Tomato;
+            this.heroKeyEventBehaviors = createHeroKeyEventBehaviors();
+            this.enemyCollisionBehaviors = createEnemyCollisionBehaviors();
+            this.heroGeneralCollisionBehaviors = createHeroGeneralCollisionBehaviors();
+            this.hero = new Hero(200, 200, heroKeyEventBehaviors, heroGeneralCollisionBehaviors);
+            this.enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors);
         }
 
-        public CreatureBehaviorRepository enemyCollisionBehaviors() {
+        public SolidColorBrush getHeroColor() {
+            return this.heroColor;
+        }
+
+        public void setHeroColor(SolidColorBrush color)
+        {
+            this.heroColor = color;
+        }
+
+        public CreatureBehaviorRepository createEnemyCollisionBehaviors() {
             List<CreatureCollisionBehavior> creatureCollisionBehaviors = new List<CreatureCollisionBehavior>();
             creatureCollisionBehaviors.Add(new EnemyCollisionBehavior());
             creatureCollisionBehaviors.Add(new EnemyMovingBehavior());
             return new CreatureBehaviorRepository(creatureCollisionBehaviors);
         }
 
-        public KeyEventBehaviorRepository heroKeyEventBehaviors()
+        public KeyEventBehaviorRepository createHeroKeyEventBehaviors()
         {
             KeyEventBehaviorRepository creatureBehaviorRepository = new KeyEventBehaviorRepository();
             creatureBehaviorRepository
-                .addTo(Key.Up, new JumpingBehavior())
-                .addTo(Key.Left, new LeftMovingBehavior())
-                .addTo(Key.Right, new RightMovingBehavior());
+                .addTo(Key.Up, new JumpingBehavior(this))
+                .addTo(Key.Left, new LeftMovingBehavior(this))
+                .addTo(Key.Right, new RightMovingBehavior(this));
             return creatureBehaviorRepository;
         }
 
-        public CreatureBehaviorRepository heroGeneralCollisionBehaviors()
+        public CreatureBehaviorRepository createHeroGeneralCollisionBehaviors()
         {
             List<CreatureCollisionBehavior> creatureCollisionBehaviors = new List<CreatureCollisionBehavior>();
             creatureCollisionBehaviors.Add(new NormalHeroCollisionBehavior());
@@ -78,8 +95,7 @@ namespace Platformer {
 
         public void reset()
         {
-            hero = new Hero(200, 200, heroKeyEventBehaviors(), heroGeneralCollisionBehaviors());
-            enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors());
+            enemy = new Enemy(500, 200, enemyBehaviors(), enemyCollisionBehaviors);
             if (!dispatcherTimer.IsEnabled)
             {
                 dispatcherTimer.Start();
@@ -89,7 +105,7 @@ namespace Platformer {
         public void start()
         {
             mainGrid.Children.Add(canvas);
-            canvas.Children.Add(hero.sprite().draw(Brushes.Tomato));
+            canvas.Children.Add(hero.sprite().draw(heroColor));
             canvas.Children.Add(enemy.sprite().draw(Brushes.Turquoise));
             startTimer();
         }
@@ -118,7 +134,7 @@ namespace Platformer {
         private void render()
         {
             canvas.Children.Clear();
-            canvas.Children.Add(hero.sprite().draw(Brushes.Tomato));
+            canvas.Children.Add(hero.sprite().draw(heroColor));
             canvas.Children.Add(enemy.sprite().draw(Brushes.Turquoise));
         }
 

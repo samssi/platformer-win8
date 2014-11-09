@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace Platformer.behaviors {
     class LeftMovingBehavior : CreatureBehavior {
 
+        public LeftMovingBehavior(GraphicsEngine graphicsEngine) : base(graphicsEngine) { }
+
         public override void behave(Creature creature)
         {
             int currentPos = creature.getPosition().getX();

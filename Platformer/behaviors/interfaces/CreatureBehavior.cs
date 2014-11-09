@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace Platformer.behaviors {
     abstract public class CreatureBehavior {
+        protected GraphicsEngine graphicsEngine;
+
+        public CreatureBehavior(GraphicsEngine graphicsEngine)
+        {
+            this.graphicsEngine = graphicsEngine;
+        }
+
         abstract public void behave(Creature creature);
     }
 }

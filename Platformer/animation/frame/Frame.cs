@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Platformer.animation.frame {
     public interface Frame {
-        void runFrame();
+        void runFrame(GraphicsEngine graphicsEngine);
     }
 }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Platformer.animation.frame {
     class HeroFrame : Frame {
-        private String frame;
+        public SolidColorBrush frame;
 
-        public HeroFrame(String frame)
+        public HeroFrame(SolidColorBrush frame)
         {
             this.frame = frame;
         }
 
-        public void runFrame()
+        public void runFrame(GraphicsEngine graphicsEngine)
         {
-            Console.WriteLine(frame);
+            graphicsEngine.setHeroColor(frame);
         }
     }
 }

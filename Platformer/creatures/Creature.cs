@@ -21,8 +21,7 @@ namespace Platformer.behaviors {
         
         public void executeKeyEventBehaviors(Key key)
         {
-            foreach (var behavior in creatureKeyEventBehaviors.getCreatureKeyBehaviors(key))
-                behavior.behave(this);
+            creatureKeyEventBehaviors.getCreatureKeyBehaviors(key).ForEach(behavior => behavior.behave(this));
         }
 
         public void executeCollisionBehaviors(CollisionType collisionType)
