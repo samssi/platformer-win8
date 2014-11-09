@@ -27,8 +27,7 @@ namespace Platformer.behaviors {
 
         public void executeCollisionBehaviors(CollisionType collisionType)
         {
-            foreach (var behavior in creatureCollisionBehaviors.getCreatureCollisionBehaviors())
-                behavior.behave(this, collisionType);
+            creatureCollisionBehaviors.getCreatureCollisionBehaviors().ForEach(behavior => behavior.behave(this, collisionType));
         }
 
         public CreatureBehaviorRepository getCreatureBehaviorRepository()

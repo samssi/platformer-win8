@@ -10,14 +10,11 @@ namespace Platformer.behaviors.collision {
 
         public override void behave(Creature me, CollisionType collisionType)
         {
-            if (collisionType.Equals(CollisionType.NONE) || collisionType.Equals(CollisionType.S) || collisionType.Equals(CollisionType.DEAD))
-            {
-                // Do nothing
-            }
-            else
-            {
-                me.setAlive(false);
-            }
+            me.setAlive(harmlessCollision(collisionType));
+        }
+
+        private Boolean harmlessCollision(CollisionType collisionType) {
+            return (collisionType.Equals(CollisionType.NONE) || collisionType.Equals(CollisionType.S) || collisionType.Equals(CollisionType.DEAD));
         }
     }
 }
